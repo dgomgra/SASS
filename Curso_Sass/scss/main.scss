@@ -1,0 +1,68 @@
+@import "variables";
+@import "mixin";
+
+// incluir un mixin en el raiz
+@include fancy-links;
+
+body {
+  font-family: $text-font;
+  color: $text-color;
+}
+
+h1, h2, h3, h4 {
+  font-family: $headline-font;
+}
+
+h2 {
+  // incluir un mixin
+  @include large-text;
+}
+
+p {
+  font-family: $text-font;
+}
+
+a {
+  color: $link-color;
+}
+
+.warning-button {
+  @include warning;
+  padding: 8px 12px;
+}
+
+#header {
+  @include box;
+  height: $header-height;
+  background-color: $theme-color;
+  #main-menu {
+
+    li {
+      display: inline;
+    }
+    a {
+      color: $menu-item-color;
+    }
+  }
+  
+  #logo {
+
+  }
+}
+
+#main {
+  width: $content-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  #content {
+  }
+
+  #sidebar {
+  }
+}
+
+#footer {
+  height: $footer-height;
+  background-color: $ternary-color;
+}

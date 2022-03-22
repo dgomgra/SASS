@@ -1,0 +1,31 @@
+// un mixin normal
+@mixin warning {
+    background-color: orange;
+    color: #fff;
+  }
+  
+  // un mixin con varias propiedades de font
+  @mixin large-text {
+    font: {
+      size: 22px;
+      weight: bold;
+    }
+  }
+  
+  @mixin rounded {
+    border-radius: 6px;
+  }
+  
+  // un mixin que incluye a otro mixin
+  @mixin box {
+    @include rounded;
+    border: 1px solid #333;
+  }
+  
+  // un mixig para links
+  @mixin fancy-links {
+    a {
+      font-style: italic;
+      text-decoration: none;
+    }
+  }
