@@ -32,7 +32,11 @@ a {
 }
 
 #header {
-  @include box;
+  // incluimos un mixin al que le pasamos el segundo parametro indicando el nombre del mismo
+  // si especificamos el nombre de los parametros los podemos informar en el orden que queramos
+  @include box($border: 1px solid #fff, $radius: 12px);
+  // incluimos un mixin que acepta parametros indeterminados 
+  @include box-shadow(2px 0px 4px #999, 1px 1px 6px $secondary-color);
   height: $header-height;
   background-color: $theme-color;
   #main-menu {

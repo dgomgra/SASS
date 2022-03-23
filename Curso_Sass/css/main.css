@@ -32,8 +32,11 @@ a {
 }
 
 #header {
-  border-radius: 6px;
-  border: 1px solid #333;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  box-shadow: 2px 0px 4px #999, 1px 1px 6px #f27731;
+  -moz-box-shadow: 2px 0px 4px #999, 1px 1px 6px #f27731;
+  -webkit-box-shadow: 2px 0px 4px #999, 1px 1px 6px #f27731;
   height: 60px;
   background-color: #170a48;
 }
@@ -56,3 +59,4 @@ a {
   height: 90px;
   background-color: #ccf962;
 }
+/*# sourceMappingURL=main.css.map */

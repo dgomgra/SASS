@@ -3,6 +3,13 @@
     background-color: orange;
     color: #fff;
   }
+
+  // un mixix con parametros indeterminados
+  @mixin box-shadow($shadows...) {
+    box-shadow: $shadows;
+    -moz-box-shadow: $shadows;
+    -webkit-box-shadow: $shadows;
+  }
   
   // un mixin con varias propiedades de font
   @mixin large-text {
@@ -12,14 +19,15 @@
     }
   }
   
-  @mixin rounded {
-    border-radius: 6px;
+  // un mixin con un parametro y un valor por defecto por si no se informa
+  @mixin rounded($radius: 6px) {
+    border-radius: $radius;
   }
   
-  // un mixin que incluye a otro mixin
-  @mixin box {
-    @include rounded;
-    border: 1px solid #333;
+  // un mixin que incluye a otro mixin y con parametros
+  @mixin box($radius: 6px, $border: 1px solid #000) {
+    @include rounded($radius);
+    border: $border;
   }
   
   // un mixig para links
