@@ -1,5 +1,16 @@
-@import "variables";
-@import "mixin";
+@import "partials/variables";
+@import "partials/mixin";
+// se pueden hacer importaciones en una sola linea
+// @import "partials/variables", "partials/mixin";
+
+// ejemplos de importaciones que se pueden realizar
+//@import url(); --> para urls
+//@import "http://"; --> para urls
+//@import "filename.css"; --> para ficheros 
+//@import "style-scren" screen; --> para media queries
+
+@include google-font("Alegreya+Sans");
+@include google-font("Titillium+web");
 
 // incluir un mixin en el raiz
 @include fancy-links;
@@ -7,6 +18,10 @@
 body {
   font-family: $text-font;
   color: $text-color;
+  // añadimos una media query dentro del body
+  @media only screen and (max-width: 960px) {
+    font-size: 125%;
+  }
 }
 
 h1, h2, h3, h4 {
@@ -29,6 +44,13 @@ a {
 .warning-button {
   @include warning;
   padding: 8px 12px;
+}
+
+// mixin que solo aplica a IE6
+@include apply-to-ie-6 {
+  body {
+    font-size: 125%;;
+  }
 }
 
 #header {
@@ -56,6 +78,11 @@ a {
 
 #main {
   width: $content-width;
+  // aplicamos una media query dentro del estilo
+  @media only screen and (max-width: 960px) {
+    width: auto;
+    max-width: $content-width;
+  }
   margin-left: auto;
   margin-right: auto;
 
