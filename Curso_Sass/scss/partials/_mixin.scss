@@ -1,5 +1,31 @@
+// Mixin para media queries
+@mixin tiny-screens() {
+  @media only screen and (max-width: 320px){
+    @content;
+  }
+}
+
+@mixin small-screens() {
+  @media only screen and (max-width: 480px){
+    @content;
+  }
+}
+@mixin medium-screens() {
+  @media only screen and (max-width: 680px){
+    @content;
+  }
+}
+@mixin large-screens() {
+  @media only screen and (max-width: 960px){
+    @content;
+  }
+}
+
+
 // un mixin para importar fuentes de texto
 @mixin google-font($font) {
+  // unquote:  funcion que convierte una cadena entre comillas en una cadena sin comillas
+  // quote: funcion que convierte una cadena sin comillas en una cadena entre comillas
   $font: unquote($font);
   @import url(https://fonts.googleapis.com/css?family=#{$font});
 }
@@ -8,6 +34,11 @@
 @mixin warning {
     background-color: orange;
     color: #fff;
+
+    &:hover {
+      // funcion para iluminar
+      background-color: lighten(orange, 10%);
+    }
   }
 
   // un mixix con parametros indeterminados

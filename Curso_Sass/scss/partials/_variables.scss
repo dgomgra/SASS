@@ -1,17 +1,41 @@
-
 // Los partials empiezan por _ para que no se compile el css
 // Porque son ficheros que se importan en otros para tener el 
 // codigo mas ordenado
 
 // Variables comienzan pr $. Por comvencion en minusculas y separando por guion los nombres
+// === THEME ===
+// Allowed values: Dark, Light, Default
+$theme: Dark;
+
 // === COLORS ===
 $text-color: #222222;
+$body-backgroud-color: #fff;
 $theme-color: #170a48;
 $secondary-color: #f27731;
 $ternary-color: #ccf962;
 // Podemos usar como valor otra variable
 $link-color: $secondary-color;
 $menu-item-color: white;
+
+@if $theme == Dark {
+    $text-color: #fff;
+    $body-backgroud-color: #22222a;
+    $theme-color: #42424a;
+    $secondary-color: #c24721;
+    $ternary-color: #698932;
+    $link-color: $secondary-color;
+    $menu-item-color: white;
+} @else if $theme == Light {
+    $text-color: #000;
+    $body-backgroud-color: #fff;
+    $theme-color: #372a27;
+    $secondary-color: #d26741;
+    $ternary-color: #b9da63;
+    $link-color: $secondary-color;
+    $menu-item-color: white;
+}
+
+
 
 // === FONTS ===
 $text-font: "Alegreya Sans", Arial, sans-serif;
@@ -21,3 +45,5 @@ $headline-font: "Titillium Web", Georgia, serif;
 $content-width: 960px;
 $header-height: 60px;
 $footer-height: 90px;
+// uso de una custom function en una variable
+$col: col-width($colums: 8);

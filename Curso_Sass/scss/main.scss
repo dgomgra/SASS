@@ -1,7 +1,8 @@
+@import "partials/functions";
 @import "partials/variables";
 @import "partials/mixin";
 // se pueden hacer importaciones en una sola linea
-// @import "partials/variables", "partials/mixin";
+//@import "partials/variables", "partials/mixin";
 
 // ejemplos de importaciones que se pueden realizar
 //@import url(); --> para urls
@@ -9,17 +10,65 @@
 //@import "filename.css"; --> para ficheros 
 //@import "style-scren" screen; --> para media queries
 
+// for loop
+@for $i from 1 through 6 {
+  .col-#{$i} {
+    width: $i * 2em;
+  }
+}
+
+// each loop de una lista
+$speakers: bob-banker, patty-plume, laura-smith;
+@each $speaker in $speakers {
+  .#{$speaker}-profile {
+    background-image: url('/img/#{$speaker}.png');
+  }
+}
+
+// each loop de un mapa
+$font-sizes: (tiny: 8px, small: 11px, medium: 13px, large: 18px);
+@each $name, $size in $font-sizes {
+  .#{$name} {
+    font-size: $size;
+  }
+}
+
+// while loop
+$j: 2;
+@while $j <= 8 {
+  .picture-#{$j} {
+    width: $j * 10%;
+  }
+  $j: $j + 2;
+} 
+
+
 @include google-font("Alegreya+Sans");
 @include google-font("Titillium+web");
 
 // incluir un mixin en el raiz
 @include fancy-links;
 
+.error {
+  color: red;
+}
+
+.critical-error {
+  // directiva para extender los estilos de otra clase
+  @extend .error;
+  bottom: 1px solid red;
+  font-weight: bold;
+}
+$contrast: normal;
 body {
   font-family: $text-font;
+  // uso de la custom funcion 
+  font-size: em(18px);
   color: $text-color;
-  // añadimos una media query dentro del body
-  @media only screen and (max-width: 960px) {
+  background-color: $body-backgroud-color;
+
+
+  @include large-screens {
     font-size: 125%;
   }
 }
@@ -39,11 +88,47 @@ p {
 
 a {
   color: $link-color;
+
+  // uso de seudo selectores
+  &:hover {
+    // uso de una funcion de oscurecimiento
+    // primer parametro el color a oscurecer
+    // segundo parametro el % de oscurecimiento
+    color: darken($link-color, 15%);
+  }
 }
+
+// Selector de marcador de posición
+%highlight {
+  font-style: italic;
+}
+
+// extensión del marcador de posición
+// si la extensión no existe, no se produce un error con !optional
+.sub-title {
+  @extend %highlight;
+  @extend .foo !optional;
+  font-size: em(20px);
+}
+
 
 .warning-button {
   @include warning;
   padding: 8px 12px;
+}
+
+.cta-button {
+  // se pueden realizar mas de una extension de otra clase
+  @extend .warning-button;
+  @extend .error;
+  @include rounded;
+  font-weight: bold;
+}
+
+.super-cta-button {
+  // se puede extender otra clase que a su vez extienda a otras
+  @extend .cta-button;
+  font-size: em(20px);
 }
 
 // mixin que solo aplica a IE6
@@ -68,6 +153,19 @@ a {
     }
     a {
       color: $menu-item-color;
+      padding: 6px 8px;
+      // animación de una barra debajo de las opciones de menu
+      // funcion de transparencia(color, valor) 
+      //valor= 1 totalmente transparente, valor=0 nada transparente
+      border-bottom: 1px solid transparentize(#fefefe, 1);
+      transition: border-bottom 0.5s;
+      transition-timing-function: ease-in-out;
+
+      &:hover {
+        // funcion de opacidad(color, valor)
+        //valor= 1 totalmente opaco, valor=0 nada nada opaco
+        border-bottom: 1px solid opacify(#fefefe, .5);
+      }
     }
   }
   
@@ -78,8 +176,7 @@ a {
 
 #main {
   width: $content-width;
-  // aplicamos una media query dentro del estilo
-  @media only screen and (max-width: 960px) {
+  @include large-screens {
     width: auto;
     max-width: $content-width;
   }
@@ -87,13 +184,28 @@ a {
   margin-right: auto;
 
   #content {
+    float: left;
+    width: 6*$col;
   }
 
   #sidebar {
+    float: right;
+    width: 2*$col;
+
+    li {
+      list-style-type: none;
+      padding: em(16px) em(20px);
+      border-bottom: 1px dashed #999;
+
+      &:hover {
+        background-color: #efefef;
+      }
+    }
   }
 }
 
 #footer {
+  clear: both;
   height: $footer-height;
   background-color: $ternary-color;
 }
